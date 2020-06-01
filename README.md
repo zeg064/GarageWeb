@@ -3,9 +3,9 @@ Changes in this branch
 
 1. Added config file for password to open/close door
 
-2. Added code that writes to logfile when d oor is activated by Raspberry Pi.
+2. Added code that writes to logfile when door is activated by Raspberry Pi.
 
-3. Added code that tails the last 6 lines of the logfilen to a new text file after every event in web.py or log.py
+3. Added code that tails the last 6 lines of the logfile to a new text file after every event in web.py or log.py
 
 4. Added an <iframe> to display the tailed logfile on the main pages.
 
