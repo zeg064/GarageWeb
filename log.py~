@@ -41,15 +41,15 @@ try:
                     print "Your Garage Door has been Open for 15 minutes"
                     DoorOpenTimerMessageSent = 1
 
-         if GPIO.input(16) == GPIO.HIGH and GPIO.input(18) == GPIO.HIGH:  #Door Status is Unknown
+         if GPIO.input(16) == GPIO.LOW and GPIO.input(18) == GPIO.HIGH:  #Door Status is Unknown
                 T1 = datetime.now().strftime(FMT)
                 logging.info(" -- Opening/Closing -- ")
                 os.system(tailcmd)
                 print(datetime.now().strftime("%Y/%m/%d -- %H:%M:%S  -- Door Opening/Closing \n"))
-                while GPIO.input(16) == GPIO.HIGH and GPIO.input(18) == GPIO.HIGH:
+                while GPIO.input(16) == GPIO.LOW and GPIO.input(18) == GPIO.HIGH:
                   time.sleep(.5)
                 else:
-                  if GPIO.input(16) == GPIO.LOW:  #Door is Closed
+                  if GPIO.input(16) == GPIO.HIGH:  #Door is Closed
                      T2 = datetime.now().strftime(FMT)
                      Td = datetime.strptime(T2, FMT) - datetime.strptime(T1, FMT)
                      Tds = Td.total_seconds()

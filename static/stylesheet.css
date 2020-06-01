@@ -64,3 +64,12 @@ block[h2] {
     width: 256px;
 }
 
+.frame-container {
+  postion: relative;
+}
+.iframe-button {
+  display: none;
+  postion: absolute;
+  top: 15px
+  left: 15px
+}

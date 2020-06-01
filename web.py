@@ -1,6 +1,7 @@
 import time
 from datetime import datetime
 from flask import Flask, render_template, request
+from config import pswd
 
 import RPi.GPIO as GPIO
 GPIO.setmode(GPIO.BOARD)  # the pin numbers refer to the board connector not the chip
@@ -26,7 +27,7 @@ def index():
         if GPIO.input(16) == GPIO.HIGH and GPIO.input(18) == GPIO.HIGH:
              print("Garage is Opening/Closing")
              return app.send_static_file('Question.html')
-        else:  
+        else:
              if GPIO.input(16) == GPIO.LOW:
                    print ("Garage is Closed")
                    return app.send_static_file('Closed.html')
@@ -38,10 +39,12 @@ def index():
 @app.route('/Garage', methods=['GET', 'POST'])
 def Garage():
         name = request.form['garagecode']
-        if name == '12345678':  # 12345678 is the Password that Opens Garage Door (Code if Password is Correct)
-                GPIO.output(7, GPIO.LOW)
-                time.sleep(1)
+        if name == pswd:  # 12345678 is the Password that Opens Garage Door (Code if Password is Correct)
                 GPIO.output(7, GPIO.HIGH)
+		time.sleep(1)
+                open("/home/pi/GarageWeb/static/log.txt","a").write(datetime.now().strftime("%Y-%m-%d %H:%M:%S  -- Triggered by RPi \n"))
+		open("/home/pi/GarageWeb/static/log.txt","a").close()
+		GPIO.output(7, GPIO.LOW)
                 time.sleep(2)
 
                 if GPIO.input(16) == GPIO.HIGH and GPIO.input(18) == GPIO.HIGH:
@@ -55,7 +58,7 @@ def Garage():
                         print ("Garage is Open")
                         return app.send_static_file('Open.html')
 
-        if name != '12345678':  # 12345678 is the Password that Opens Garage Door (Code if Password is Incorrect)
+        if name != pswd:  # 12345678 is the Password that Opens Garage Door (Code if Password is Incorrect)
                 if name == "":
                         name = "NULL"
                 print("Garage Code Entered: " + name)
@@ -81,6 +84,11 @@ def logfile():
 @app.route('/images/<picture>')
 def images(picture):
         return app.send_static_file('images/' + picture)
+
+@app.route('/logtail.txt')
+def logtail():
+        return app.send_static_file('logtail.txt')
+
 
 if __name__ == '__main__':
         app.run(debug=True, host='0.0.0.0', port=5000)
