@@ -1,3 +1,21 @@
+Changes in this branch
+
+
+1. Added config file for password to open/close door
+
+2. Added code that writes to logfile when d oor is activated by Raspberry Pi.
+
+3. Added code that tails the last 6 lines of the logfilen to a new text file after every event in web.py or log.py
+
+4. Added an <iframe> to display the tailed logfile on the main pages.
+
+5. Added a button to refresh the <iframe> as it doesn't automatically update.
+
+6. Writes from log.py are done by logging module.
+
+-------------------------------------------------------------------
+
+
 YouTube Video Instructions found here: https://youtu.be/Fcx6wANw9KM
 
 Setting up a Flask web server to control your garage door & display the door status & log usage.
