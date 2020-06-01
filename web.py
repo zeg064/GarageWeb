@@ -9,7 +9,7 @@ GPIO.setwarnings(False)
 GPIO.setup(16, GPIO.IN, GPIO.PUD_UP) # set up pin ?? (one of the above listed pins) as an input with a pull-up resistor
 GPIO.setup(18, GPIO.IN, GPIO.PUD_UP) # set up pin ?? (one of the above listed pins) as an input with a pull-up resistor
 GPIO.setup(7, GPIO.OUT)
-GPIO.output(7, GPIO.HIGH)
+GPIO.output(7, GPIO.LOW)
 GPIO.setup(11, GPIO.OUT)
 GPIO.output(11, GPIO.HIGH)
 GPIO.setup(13, GPIO.OUT)
