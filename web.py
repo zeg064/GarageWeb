@@ -41,10 +41,10 @@ def Garage():
         name = request.form['garagecode']
         if name == pswd:  # 12345678 is the Password that Opens Garage Door (Code if Password is Correct)
                 GPIO.output(7, GPIO.HIGH)
-		time.sleep(1)
+                time.sleep(1)
                 open("/home/pi/GarageWeb/static/log.txt","a").write(datetime.now().strftime("%Y-%m-%d %H:%M:%S  -- Triggered by RPi \n"))
-		open("/home/pi/GarageWeb/static/log.txt","a").close()
-		GPIO.output(7, GPIO.LOW)
+                open("/home/pi/GarageWeb/static/log.txt","a").close()
+                GPIO.output(7, GPIO.LOW)
                 time.sleep(2)
 
                 if GPIO.input(16) == GPIO.HIGH and GPIO.input(18) == GPIO.HIGH:
